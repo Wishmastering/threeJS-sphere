@@ -61,10 +61,27 @@ window.addEventListener("resize", () => {
   renderer.setSize(sizes.width, sizes.height);
 });
 
+// Add a flag to control color change
+let isColorChangeEnabled = true;
+let colorChangeDelay = 100;
+
 const loop = () => {
   controls.update();
+
+  // Generate random RGB values for the sphere's color
+  if (isColorChangeEnabled) {
+    // Generate random RGB values for the sphere's color
+    const r = Math.random();
+    const g = Math.random();
+    const b = Math.random();
+
+    // Set the new color
+    mesh.material.color.setRGB(r, g, b);
+  }
+
   renderer.render(scene, camera);
-  window.requestAnimationFrame(loop);
+  setTimeout(loop, colorChangeDelay); // Add a delay before calling the loop again
+  // window.requestAnimationFrame(loop);
 };
 
 loop();
@@ -76,24 +93,34 @@ tl.fromTo("nav", { y: "-100%" }, { y: "0%" });
 tl.fromTo(".title", { opacity: 0 }, { opacity: 1 });
 
 // Mouse Animation Colorrrr
-let mouseDown = false;
-let rgb = [12, 23, 55];
-window.addEventListener("mousedown", () => (mouseDown = true));
-window.addEventListener("mouseup", () => (mouseDown = false));
+// let mouseDown = false;
+// let rgb = [12, 23, 55];
+// window.addEventListener("mousedown", () => (mouseDown = true));
+// window.addEventListener("mouseup", () => (mouseDown = false));
 
-window.addEventListener("mousemove", (e) => {
-  if (mouseDown) {
-    rgb = [
-      Math.round((e.pageX / sizes.width) * 255),
-      Math.round((e.pageY / sizes.width) * 255),
-      150,
-    ];
-    // Let's animate
-    let newColor = new THREE.Color(`rgb(${rgb.join(",")})`);
-    gsap.to(mesh.material.color, {
-      r: newColor.r,
-      g: newColor.g,
-      b: newColor.b,
-    });
-  }
+// window.addEventListener("mousemove", (e) => {
+//   if (mouseDown) {
+//     rgb = [
+//       Math.round((e.pageX / sizes.width) * 255),
+//       Math.round((e.pageY / sizes.width) * 255),
+//       150,
+//     ];
+//     // Let's animate
+//     let newColor = new THREE.Color(`rgb(${rgb.join(",")})`);
+//     gsap.to(mesh.material.color, {
+//       r: newColor.r,
+//       g: newColor.g,
+//       b: newColor.b,
+//     });
+//   }
+// });
+
+window.addEventListener("mousedown", () => {
+  controls.autoRotate = false;
+  isColorChangeEnabled = false;
+});
+
+window.addEventListener("mouseup", () => {
+  controls.autoRotate = true;
+  isColorChangeEnabled = true;
 });
