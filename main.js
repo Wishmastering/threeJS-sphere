@@ -124,3 +124,20 @@ window.addEventListener("mouseup", () => {
   controls.autoRotate = true;
   isColorChangeEnabled = true;
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize ScrollMagic controller
+  var controller = new ScrollMagic.Controller();
+
+  // Build scene
+  new ScrollMagic.Scene({
+    triggerElement: "#trigger1", //
+    triggerHook: 0.5, // DONDE quiero que "este el trigger de los eventos"
+    duration: "53%", // Cuando QUIERO que desaparezca la animation
+    offset: -100, // Cuando QUIERO que se dispare animacion
+    // negativo sube y positivo baja el trigger
+  })
+    .setClassToggle("#reveal1", "visible")
+    .addIndicators() // Add debug indicators
+    .addTo(controller);
+});

@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+/* h1 {
+  color: aqua;
+  z-index: 2;
+  position: absolute;
+} */
+
 body,
 html {
   overflow-x: hidden;
@@ -46,4 +52,56 @@ nav ul {
   left: 50%;
   top: 75%;
   transform: translate(-50%, -75%);
+}
+
+.div {
+  margin-top: 800px;
+  width: 100%;
+  color: rgb(10, 129, 233);
+  z-index: 3;
+  /* position: absolute; */
+}
+
+.div h1 {
+  z-index: 3;
+}
+
+.div2 {
+  position: absolute;
+  margin-top: 400px;
+  width: 100%;
+  color: palegreen;
+  z-index: 3;
+}
+
+.div2 h1 {
+  position: relative;
+  bottom: 300px;
+}
+
+.div3 {
+  position: absolute;
+  margin-top: 1000px;
+}
+
+.div3 h3 {
+  position: relative;
+  bottom: 100px;
+}
+
+/*  ScrollMagic Below */
+#reveal1 {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 1s ease-in-out;
+}
+
+#reveal1.visible {
+  opacity: 1;
+  transform: none;
+}
+
+#trigger1 {
+  background-color: red;
+  height: 10px;
 }
